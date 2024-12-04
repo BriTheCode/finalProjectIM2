@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+    height: 100vh;
+}
+#main-title {
+    text-align: center;
+    letter-spacing: 5px;
+    font-family: 'Times New Roman';
+}
+
+#flexing {
+    display: flex;
+    flex-direction: row;
+}
+#vertical {
+    border: 2px solid rgb(123, 27, 27);
+    padding: 10px;
+    height: 100vh;
+}
+
+:root{
+    --offcanvas-width: 270px;
+}
+
+.sidebar-nav{
+    width: var(--offcanvas-width);
+}
+@media (min-width: 992px){
+    .sidebar-nav{
+        transform: none;
+        visibility: visible  !important;
+    }
+}

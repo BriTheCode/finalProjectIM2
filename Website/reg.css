@@ -1,0 +1,17 @@
+.backgrounds{
+    margin: 0;
+        height: 100vh;
+        background: linear-gradient(
+            to bottom,
+            #e1b382, /* Sand Tan */
+            #c89666, /* Sand Tan Shadow */
+            #2d545e, /* Night Blue */
+            #12343b  /* Night Blue Shadow */
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+        color: white;
+        text-align: center;
+} 

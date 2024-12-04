@@ -1,0 +1,93 @@
+CREATE DATABASE accounts;
+USE accounts;
+DROP DATABASE accounts;
+
+-- FOR REGISTRATION / EMPLOYEE
+CREATE TABLE registration (
+user_id INT PRIMARY KEY AUTO_INCREMENT,
+user_name VARCHAR (25),
+email VARCHAR (25),
+password char (25)
+); 
+
+SELECT * FROM registration;
+-- DEPARTMENTS 
+CREATE TABLE departments (
+department_id INT PRIMARY KEY AUTO_INCREMENT,
+user_id INT,
+FOREIGN KEY (user_id) REFERENCES registration (user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+department_name VARCHAR (50),
+location VARCHAR (100)
+);
+
+-- FOR PROJECTS 
+CREATE TABLE projects (
+project_id INT PRIMARY KEY AUTO_INCREMENT,
+department_id INT,
+FOREIGN KEY (department_id) REFERENCES departments (department_id) ON DELETE CASCADE ON UPDATE CASCADE,
+project_name VARCHAR (100),
+descriptions VARCHAR (100),
+startDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+endDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- FOR TABLE TASK 
+CREATE TABLE tasks (
+task_id INT PRIMARY KEY AUTO_INCREMENT,
+project_id INT,
+FOREIGN KEY (project_id) REFERENCES projects (project_id) ON DELETE CASCADE ON UPDATE CASCADE,
+task_name VARCHAR (50),
+stats VARCHAR (100)
+); 
+
+INSERT INTO registration (user_name, email, password)
+VALUES 
+('John Doe', 'johndoe@example.com', 'password123'),
+('Jane Smith', 'janesmith@example.com', 'password456'),
+('bob ', 'bob@example.com', 'bob123'),
+('brian', 'brian@example.com', 'brian123');
+
+INSERT INTO departments (user_id, department_name, location)
+VALUES 
+(1, "building 10 ", "PNC"),(2, "building 11 ", "TNC"), (3, "building 13 ", "CCC") ;
+
+
+
+-- Insert data into the `projects` table
+INSERT INTO projects (project_id, project_name, descriptions)
+VALUES 
+(1, 'Project A', 'Description for Project A'),
+(2, 'Project C', 'Description for Project C');
+
+
+-- Insert data into the `tasks` table
+INSERT INTO tasks (project_id, task_name, stats) VALUES (3, 'Task 1 for Project A', 'In Progress'), (4, 'Task 2 for Project B', 'Completed');
+
+
+
+-- departments JOINING 
+SELECT r.user_id, d.department_id, d.department_name, d.location 
+FROM departments d 
+JOIN registration r ON r.user_id = d.user_id;
+-- UPDATING DEPARTMENTS 
+UPDATE departments set department_name = 'delacruz' WHERE user_id = '3'; 
+
+SELECT * FROM departments;
+
+DELETE FROM departments WHERE user_id = 1;
+
+SELECT * FROM registration;
+SELECT * FROM tasks;
+SELECT * FROM projects;
+
+
+-- JOINING TASK AND PROJECTS 
+SELECT p.project_id, p.department_id, p.project_name, p.descriptions, p.startDate, p.endDate, t.task_id, t.task_name, t.stats FROM
+ projects p JOIN tasks t ON p.project_id = t.project_id;
+
+
+UPDATE projects SET project_name = 'Project D' WHERE project_id = 9;
+UPDATE projects SET project_name = 'Project D' WHERE department_id = 1;
+
+SELECT COUNT(*) AS total_count FROM registration;
+SELECT COUNT(*) AS total_count  FROM departments;

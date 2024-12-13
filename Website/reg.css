@@ -1,0 +1,15 @@
+body {
+            background: linear-gradient(
+                to bottom,
+                #e1b382, /* Sand Tan */
+                #c89666, /* Sand Tan Shadow */
+                #2d545e, /* Night Blue */
+                #12343b  /* Night Blue Shadow */
+            );
+        
+        }
+
+label span{
+    color: white;
+
+}
